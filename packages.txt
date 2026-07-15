@@ -70,7 +70,7 @@ plasma-firewall
 plasma-integration
 plasma-keyboard
 plasma-nm
-plasmapa
+plasma-pa
 plasma-systemmonitor
 plasma-thunderbolt
 plasma-vault
