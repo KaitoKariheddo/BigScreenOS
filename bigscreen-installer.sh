@@ -49,6 +49,7 @@ dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 bash "$dir/installer.sh" $final_disk $steaminstall
 
 cp "$dir/configurator.sh" /mnt
+chmod 755 /mnt/configurator.sh
 arch-chroot /mnt ./configurator.sh $steaminstall
 
 rm /mnt/configurator.sh
