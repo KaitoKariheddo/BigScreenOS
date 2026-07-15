@@ -48,9 +48,10 @@ fi
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 bash "$dir/installer.sh" $final_disk $steaminstall
 
-cp "$dir/configurator.sh" /mnt/tmp
-arch-chroot /mnt /tmp/configurator.sh $steaminstall
+cp "$dir/configurator.sh" /mnt
+arch-chroot /mnt ./configurator.sh $steaminstall
 
+rm /mnt/configurator.sh
 umount /mnt/boot
 umount /mnt
 reboot
