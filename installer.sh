@@ -25,7 +25,7 @@ echo "starting installation..."
 #partition and format
 ###############################################################################
 
-if [[ ${drive:5:4} == "nvme" ]] 
+if [[ ${drive:5:4} == "nvme" ]]; then
     drive="${drive}p"
 fi
 
