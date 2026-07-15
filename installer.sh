@@ -45,6 +45,8 @@ echo -e "\n\033[36mDrive done\033[0m"
 #system and package installation
 ###############################################################################
 
+pacman-key —init 
+
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 pacstrap /mnt $(< $dir/packages.txt)
