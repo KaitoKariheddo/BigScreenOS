@@ -2,6 +2,7 @@
 set -euo pipefail
 
 steam=$1
+passtext=$2
 
 ###############################################################################
 #host name
@@ -75,11 +76,12 @@ if [[ "$steam" == "yes" ]]; then
 fi
 
 ###############################################################################
-#user creation
+#user creation and password
 ###############################################################################
+echo -e "$passtext\n$passtext" | passwd
 
 useradd -m -g users -s /bin/bash bigscreenuser
-echo -e "guest\nguest" | passwd bigscreenuser
+echo -e "$passtext\n$passtext" | passwd bigscreenuser
 gpasswd -a bigscreenuser wheel
 
 ###############################################################################
