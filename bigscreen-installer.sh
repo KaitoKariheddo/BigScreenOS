@@ -46,7 +46,7 @@ fi
 #echo "$steaminstall"
 
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-bash "$dir/installer.sh" $final_disk 
+bash "$dir/installer.sh" $final_disk $steaminstall
 
 cp "$dir/configurator.sh" /mnt/tmp
 arch-chroot /mnt /tmp/configurator.sh $steaminstall
