@@ -98,6 +98,7 @@ echo "Session=plasma-bigscreen-wayland.desktop" >> /etc/plasmalogin.conf.d/autol
 systemctl enable reflector.service
 systemctl enable --now fstrim.timer
 systemctl enable --now systemd-timesyncd.service
+systemctl enable NetworkManager.service
 systemctl enable acpid
 systemctl enable avahi-daemon
 systemctl enable cups.service
