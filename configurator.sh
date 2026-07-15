@@ -85,7 +85,7 @@ gpasswd -a bigscreenuser wheel
 
 echo "[Autologin]"
 echo "User=bigscreenuser"
-echo "Session=bigscreen.desktop"
+echo "Session=plasma-bigscreen-wayland.desktop"
 
 ###############################################################################
 #services
