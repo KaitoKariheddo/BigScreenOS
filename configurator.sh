@@ -1,0 +1,101 @@
+#!/bin/bash
+set -euo pipefail
+
+steam=$1
+
+###############################################################################
+#host name
+###############################################################################
+
+echo bigscreenos > /etc/hostname
+
+###############################################################################
+#set locale to en_US 
+###############################################################################
+
+echo "en_US.UTF-8" >> /etc/locale.gen
+locale-gen
+
+###############################################################################
+#hosts
+###############################################################################
+
+echo "#<ip-address>	<hostname.domain.org>	<hostname>"
+echo "127.0.0.1	localhost.localdomain	localhost"
+echo "::1		localhost.localdomain	localhost" 
+
+###############################################################################
+#initramfs
+###############################################################################
+
+mkinitcpio -p linux
+
+###############################################################################
+#bootloader
+###############################################################################
+
+bootctl install
+
+echo "title    BigScreenOS" > /boot/loader/entries/arch-uefi.conf
+echo "linux    /vmlinuz-linux" >> /boot/loader/entries/arch-uefi.conf
+echo "initrd   /initramfs-linux.img" >> /boot/loader/entries/arch-uefi.conf
+echo "options  root=LABEL=ROOT rw lang=en init=/usr/lib/systemd/systemd locale=en_US.UTF-8" >> /boot/loader/entries/arch-uefi.conf
+
+echo "title    BigScreenOS Fallback" > /boot/loader/entries/arch-uefi-fallback.conf
+echo "linux    /vmlinuz-linux" >> /boot/loader/entries/arch-uefi-fallback.conf
+echo "initrd   /initramfs-linux-fallback.img" >> /boot/loader/entries/arch-uefi-fallback.conf
+echo "options  root=LABEL=ROOT rw lang=en init=/usr/lib/systemd/systemd locale=en_US.UTF-8" >> /boot/loader/entries/arch-uefi-fallback.conf
+
+echo "default   arch-uefi.conf" > /boot/loader/loader.conf
+echo "timeout   1" >> /boot/loader/loader.conf
+
+bootctl update
+
+###############################################################################
+#activate multilib
+###############################################################################
+
+echo "[multilib]" >> /etc/pacman.conf
+echo "SigLevel = PackageRequired TrustedOnly" >> /etc/pacman.conf
+echo  "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+
+###############################################################################
+#stea and 32bit drivers
+###############################################################################
+systemctl start reflector.services
+pacman -Sy
+
+pacman -S lib32-vulkan-radeon lib32-vulkan-intel lib32-nvidia-utils lib32-mesa
+
+if [[ "$steam" == "yes" ]]; then
+    pacman -S steam
+fi
+
+###############################################################################
+#user creation
+###############################################################################
+
+useradd -m -g users -s /bin/bash bigscreenuser
+gpasswd -a bigscreenuser wheel
+
+###############################################################################
+#desktop
+###############################################################################
+
+echo "[Autologin]"
+echo "User=bigscreenuser"
+echo "Session=bigscreen.desktop"
+
+###############################################################################
+#services
+###############################################################################
+
+systemctl enable reflector.service
+systemctl enable --now fstrim.timer
+systemctl enable --now systemd-timesyncd.service
+systemctl enable acpid
+systemctl enable avahi-daemon
+systemctl enable cups.service
+systemctl enable plasmalogin.service
+
+exit
