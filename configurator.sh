@@ -34,10 +34,10 @@ mkinitcpio -p linux
 #bootloader
 ###############################################################################
 
-bootctl install
 chmod 700 /boot
 chmod 700 /boot/loader
 chmod 600 /boot/loader/random-seed
+bootctl install
 
 echo "title    BigScreenOS" > /boot/loader/entries/arch-uefi.conf
 echo "linux    /vmlinuz-linux" >> /boot/loader/entries/arch-uefi.conf
@@ -86,6 +86,7 @@ gpasswd -a bigscreenuser wheel
 #desktop
 ###############################################################################
 
+mkdir /etc/plasmalogin.conf.d/
 echo "[Autologin]" > /etc/plasmalogin.conf.d/autologin.conf
 echo "User=bigscreenuser" >> /etc/plasmalogin.conf.d/autologin.conf
 echo "Session=plasma-bigscreen-wayland.desktop" >> /etc/plasmalogin.conf.d/autologin.conf
