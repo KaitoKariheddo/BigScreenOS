@@ -86,9 +86,9 @@ gpasswd -a bigscreenuser wheel
 #desktop
 ###############################################################################
 
-echo "[Autologin]"
-echo "User=bigscreenuser"
-echo "Session=plasma-bigscreen-wayland.desktop"
+echo "[Autologin]" > /etc/plasmalogin.conf.d/autologin.conf
+echo "User=bigscreenuser" >> /etc/plasmalogin.conf.d/autologin.conf
+echo "Session=plasma-bigscreen-wayland.desktop" >> /etc/plasmalogin.conf.d/autologin.conf
 
 ###############################################################################
 #services
