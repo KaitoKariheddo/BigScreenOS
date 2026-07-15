@@ -65,10 +65,10 @@ echo  "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 systemctl start reflector.services
 pacman -Sy
 
-pacman -S lib32-vulkan-radeon lib32-vulkan-intel lib32-nvidia-utils lib32-mesa
+pacman -S --noconfirm lib32-vulkan-radeon lib32-vulkan-intel lib32-nvidia-utils lib32-mesa
 
 if [[ "$steam" == "yes" ]]; then
-    pacman -S steam
+    pacman -S --noconfirm steam
 fi
 
 ###############################################################################
