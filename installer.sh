@@ -47,7 +47,7 @@ echo -e "\n\033[36mDrive done\033[0m"
 
 pacman-key —init
 pacman-key --populate archlinux
-pacman -Sy archlinux-keyring
+pacman -Sy --noconfirm archlinux-keyring
 
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
