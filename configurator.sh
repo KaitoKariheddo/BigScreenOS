@@ -76,6 +76,7 @@ fi
 ###############################################################################
 
 useradd -m -g users -s /bin/bash bigscreenuser
+echo -e "guest\nguest" | passwd bigscreenuser
 gpasswd -a bigscreenuser wheel
 
 ###############################################################################
