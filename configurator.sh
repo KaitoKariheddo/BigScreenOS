@@ -2,7 +2,7 @@
 set -euo pipefail
 
 steam=$1
-passtext=$2
+#passtext=$2
 
 ###############################################################################
 #host name
@@ -78,10 +78,10 @@ fi
 ###############################################################################
 #user creation and password and sudo
 ###############################################################################
-echo -e "$passtext\n$passtext" | passwd
+#echo -e "$passtext\n$passtext" | passwd
 
 useradd -m -g users -s /bin/bash bigscreenuser
-echo -e "$passtext\n$passtext" | passwd bigscreenuser
+#echo -e "$passtext\n$passtext" | passwd bigscreenuser
 
 gpasswd -a bigscreenuser wheel
 mkdir -p /etc/sudoers.d/
