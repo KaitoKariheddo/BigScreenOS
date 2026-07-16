@@ -76,19 +76,23 @@ if [[ "$steam" == "yes" ]]; then
 fi
 
 ###############################################################################
-#user creation and password
+#user creation and password and sudo
 ###############################################################################
 echo -e "$passtext\n$passtext" | passwd
 
 useradd -m -g users -s /bin/bash bigscreenuser
 echo -e "$passtext\n$passtext" | passwd bigscreenuser
+
 gpasswd -a bigscreenuser wheel
+mkdir -p /etc/sudoers.d/
+echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/99-wheel
+chmod 0440 /etc/sudoers.d/99-wheel
 
 ###############################################################################
 #desktop
 ###############################################################################
 
-mkdir /etc/plasmalogin.conf.d/
+mkdir -p /etc/plasmalogin.conf.d/
 echo "[Autologin]" > /etc/plasmalogin.conf.d/autologin.conf
 echo "User=bigscreenuser" >> /etc/plasmalogin.conf.d/autologin.conf
 echo "Session=plasma-bigscreen-wayland.desktop" >> /etc/plasmalogin.conf.d/autologin.conf
