@@ -88,6 +88,11 @@ mkdir -p /etc/sudoers.d/
 echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/99-wheel
 chmod 0440 /etc/sudoers.d/99-wheel
 
+gpasswd -a bigscreenuser audio
+gpasswd -a bigscreenuser video
+gpasswd -a bigscreenuser games
+gpasswd -a bigscreenuser power
+
 ###############################################################################
 #desktop
 ###############################################################################
