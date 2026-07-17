@@ -80,14 +80,15 @@ fi
 ###############################################################################
 #echo -e "$passtext\n$passtext" | passwd
 
-useradd -m -g users -s /bin/bash bigscreenuser
+useradd -m -s /bin/bash bigscreenuser
 #echo -e "$passtext\n$passtext" | passwd bigscreenuser
 
-gpasswd -a bigscreenuser wheel
 mkdir -p /etc/sudoers.d/
 echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/99-wheel
 chmod 0440 /etc/sudoers.d/99-wheel
 
+gpasswd -a bigscreenuser wheel
+gpasswd -a bigscreenuser users
 gpasswd -a bigscreenuser audio
 gpasswd -a bigscreenuser video
 gpasswd -a bigscreenuser games
