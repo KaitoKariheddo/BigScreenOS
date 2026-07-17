@@ -83,7 +83,7 @@ fi
 #echo -e "$passtext\n$passtext" | passwd
 
 useradd -m -s /bin/bash bigscreenuser
-passwd --expire bigscreenuser
+#passwd --expire bigscreenuser
 #echo -e "$passtext\n$passtext" | passwd bigscreenuser
 
 mkdir -p /etc/sudoers.d/
