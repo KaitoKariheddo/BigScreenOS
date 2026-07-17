@@ -39,6 +39,7 @@ bootctl install
 chmod 700 /boot
 chmod 700 /boot/loader
 chmod 600 /boot/loader/random-seed
+echo -e "\n\033[36mAccess corrected\033[0m"
 
 echo "title    BigScreenOS" > /boot/loader/entries/arch-uefi.conf
 echo "linux    /vmlinuz-linux" >> /boot/loader/entries/arch-uefi.conf
