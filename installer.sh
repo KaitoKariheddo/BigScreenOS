@@ -19,7 +19,7 @@ for ((i=5; i>0; i--)); do
   sleep 1
 done
 echo
-echo "starting installation..."
+echo -e "\n\033[36mstarting installation\033[0m"
 
 ###############################################################################
 #partition and format
